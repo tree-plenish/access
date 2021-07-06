@@ -18,14 +18,14 @@ def datatable():
         date.append(date_pattern.search(line)[0])
         if line.find("?") == -1:
             parameter.append('none')
-            campaign_id.append('') # Appending empty str instead of empty array
+            campaign_id.append('0') # Appending empty str instead of empty array
         else:
             parameter.append(re.findall('[a-zA-Z]+\=[a-zA-Z\d+\-\%\_\:]+',line))
             c = (re.findall(r'[c]\=(\d+)',line))
             if len(c):
                 campaign_id.append(c[0]) # Appending value excluding brackets
             else:
-                campaign_id.append("")
+                campaign_id.append('0')
 
             
     df = pd.DataFrame({'IP Address': ip, 'Date' : date, 'Parameter' : parameter, 'Campaign ID' : campaign_id})
